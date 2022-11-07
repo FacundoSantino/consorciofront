@@ -1,0 +1,71 @@
+.clase{
+    background: rgb(86,118,247);
+    background: linear-gradient(110deg, rgba(86,118,247,1) 24%, rgba(10,69,149,1) 100%); 
+
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+}
+
+.caja{
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    width: auto;
+    border-radius: 20px;
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+    box-shadow: 35px 25px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.tituloLogoPerfil{
+    display:grid;
+    grid-template-columns: 2fr 7fr 1fr ;
+}
+
+.imagen, .imagenP{
+    width: fit-content;
+    height: fit-content;
+}
+
+.imagenP{
+    background:rgb(86,118,247);
+    border-radius: 50px;
+    padding: 2px;
+}
+
+.items{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr;
+}
+
+
+.button{
+    background-color: #5676f7;
+    color:black;
+    margin: auto;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.item1{
+    grid-area: 1/2/2/3;
+}
+.item2{
+    grid-area: 1/4/2/5;
+}
+.item3{
+    grid-area: 2/1/3/2;
+}
+.item4{
+    grid-area: 2/3/3/4;
+}
+.item5{
+    grid-area:2/5/3/6;
+}

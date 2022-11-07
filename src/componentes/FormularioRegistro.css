@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+.Formulario {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grilla{
+    display: grid;
+    margin: 5% 25% 5% 25%; 
+}
+
+.grilla p{
+    text-align: left;
+    margin: 0%;
+}
+
+.iPersona, .iPassword{
+    background-color: #5676f7;
+    padding: 1%;
+}
+
+input:hover{
+    opacity: 80%;
+    box-shadow: 1px 1px;
+}
+
+.for{
+    display: inline-flex
+  }
+
+  label{
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  input{
+    width: 80%;
+    padding: 12px 20px; 
+    background-color: #ccc;
+    justify-content: center;
+    border: 1px solid #ccc;
+  }

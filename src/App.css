@@ -32,7 +32,6 @@ main .caja{
   border-radius: 20px;
   justify-content: center;
   box-shadow: 35px 25px 10px 5px rgba(0, 0, 0, 0.5);
-
 }
 
 .boton{
@@ -42,7 +41,6 @@ main .caja{
   border: none;
   cursor: pointer;
   width: 100%;
-  
 }
 
 label{

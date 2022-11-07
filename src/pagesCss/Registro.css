@@ -1,0 +1,57 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+.Registro {
+  text-align: center;
+ }
+
+.Registro-main {
+  background: rgb(86,118,247);
+  background: linear-gradient(110deg, rgba(86,118,247,1) 24%, rgba(10,69,149,1) 100%); 
+  
+  
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+*{
+  font-family: 'Raleway', sans-serif;
+  color:black;
+}
+
+main .caja{
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  width: 50%;
+  border-radius: 20px;
+  justify-content: center;
+  box-shadow: 35px 25px 10px 5px rgba(0, 0, 0, 0.5);
+
+}
+
+.boton{
+  background-color: #5676f7;
+  color: white;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  
+}
+
+label{
+  display: inline-flex;
+  justify-content: center;
+}
+
+.logo-container{
+  justify-content: center;
+  text-align: center;
+}
+
