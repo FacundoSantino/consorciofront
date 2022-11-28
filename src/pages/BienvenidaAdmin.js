@@ -6,51 +6,69 @@ import capas from '../imagenes/capas.png'
 import reclamos from '../imagenes/reclamos.png'
 import personas from '../imagenes/personas.png'
 import acciones from '../imagenes/log.png'
-import '../pagesCss/BienvenidaAdmin.css'
+import { Link } from 'react-router-dom'
 
 
 class BienvenidaAdmin extends Component{
+
+    cerrarSesion=e=>{
+        localStorage.setItem("logeado","false");
+        localStorage.setItem("user","");
+        localStorage.setItem("nombre","");
+        localStorage.setItem("documento","");
+        localStorage.setItem("admin","false");
+    }
     
     
     render(){
 
-        let nombre='Pedro';
+        if(localStorage.getItem("admin")=="true"){
+                                    
+            let nombre=localStorage.getItem("nombre");
   
-        return(
-             <div className='clase'>
-                  <div className='caja'>
-                      <div className='tituloLogoPerfil'>
-                          <img src={logo} className='imagen'/>
-                          <h1> ¡Bienvenido, {nombre}!</h1>
-                          <img src={persona} className='imagenP'/>
-                      </div>
-                      <div className='items'>
-                          <div className='item1'>
-                              <img src={edificios}/>
-                              <input type='Submit' value='Edificios' className='button'/>
-                          </div>
-                        
-                          <div className='item2'>
-                              <img src={capas}/>
-                              <input type='Submit' value='Unidades' className='button'/>
-                          </div>
+            return(
+                <main>
+                <div className='clase'>
+                     <div className='caja'>
+                         <div className='tituloLogoPerfil'>
+                             <img src={logo} className='imagen'/>
+                             <h1> ¡Bienvenido, {nombre}!</h1>
+                             <Link to="/" onClick={this.cerrarSesion}><img src={persona} className='iPersona iconoFondo'/></Link>
+                         </div>
+                         <div className='items'>
+                             <div className='item1'>
+                                 <img src={edificios}/>
+                                 <Link to='/edificios' ><button className='boton'>Edificios</button></Link>
+                             </div>
+   
+                             <div className='item2'>
+                                 <img src={capas}/>
+                                 <Link to='/unidades' ><button className='boton'>Unidades</button></Link>
+                             </div>
+   
+                             <div className='item3'>
+                                 <img src={reclamos}/>
+                                 <Link to='/reclamosadmin' ><button className='boton'>Reclamos</button></Link>
+                             </div>
+                             <div className='item4'>
+                                 <img src={personas}/>
+                                 <Link to='/personas' ><button className='boton'>Personas</button></Link>
+                             </div>
+                             <div className='item5'>
+                                 <img src={acciones}/>
+                                 <Link to='/acciones' ><button className='boton'>Acciones</button></Link>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+                </main>
+             )
+            
+        }
+        else{
+          window.location.pathname="/"
+        }
 
-                          <div className='item3'>
-                              <img src={reclamos}/>
-                              <input type='Submit' value='Reclamos' className='button'/>
-                          </div>
-                          <div className='item4'>
-                              <img src={personas}/>
-                              <input type='Submit' value='Personas' className='button'/>
-                          </div>
-                          <div className='item5'>
-                              <img src={acciones}/>
-                              <input type='Submit' value='Acciones' className='button'/>
-                          </div>
-                      </div>
-                  </div>
-             </div>
-          )
       }
 }
 

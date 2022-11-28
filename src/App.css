@@ -5,18 +5,15 @@
   text-align: center;
  }
 
-.App-main {
+main {
   background: rgb(86,118,247);
   background: linear-gradient(110deg, rgba(86,118,247,1) 24%, rgba(10,69,149,1) 100%); 
-  
-  
   min-height: 100vh;
   height: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  font-size: calc(10px+2vmin);
   color: white;
 }
 
@@ -25,13 +22,37 @@
   color:black;
 }
 
-main .caja{
+img {
+  display: block;
+  max-width:100%;
+  max-height:105px;
+  width: auto;
+  height: auto;
+}
+
+.centrado{
+  text-align: center;
+}
+
+.caja{
   background: rgba(255, 255, 255, 0.8);
   padding: 20px;
-  width: 50%;
+  width: auto;
   border-radius: 20px;
-  justify-content: center;
   box-shadow: 35px 25px 10px 5px rgba(0, 0, 0, 0.5);
+  display:inline-flex;
+  flex-flow: column;
+}
+
+.cajaMuestra{
+  background: rgba(0, 0, 0, 0.4);
+  width: auto;
+  display:block;
+  overflow-y: auto;
+}
+
+.limitador{
+  height: 50%;
 }
 
 .boton{
@@ -40,7 +61,7 @@ main .caja{
   margin: auto;
   border: none;
   cursor: pointer;
-  width: 100%;
+  max-width:100%;
 }
 
 label{
@@ -53,3 +74,114 @@ label{
   text-align: center;
 }
 
+.Formulario {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grilla{
+    display: grid;
+    margin: 5% 25% 5% 25%; 
+}
+
+.grilla p{
+    text-align: left;
+    margin: 0%;
+}
+
+.iPersona, .iPassword{
+    background-color: #5676f7;
+    padding: 1%;
+}
+
+.iconoFondo{
+  border-radius:20px;
+}
+
+input:hover{
+    opacity: 80%;
+    box-shadow: 1px 1px;
+}
+
+.for{
+  display: inline-flex
+}
+
+label{
+  display: inline-flex;
+  justify-content: center;
+}
+
+input[type="text"],input[type="password"]{
+  width: 80%;
+  padding: 12px 20px; 
+  background-color: #ccc;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.items{
+  display:inline-flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.item{
+  display:flex;
+  flex-flow:column;
+  justify-content: center;
+}
+
+.tituloLogoPerfil{
+  display: inline-flex;
+}
+
+li>div{
+  background-color:white;
+  border-radius:2px;
+  max-width:80%;
+  padding:10px;
+  border:10px solid #5676f7;
+}
+
+ul>li{
+  padding:3px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+li >div >div>div{
+  display:inline-flex;
+  flex-wrap: wrap;
+}
+
+li> div> div> div> img{
+  max-height: 250px !important;
+}
+
+li > div > button {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+li>div>button:hover {
+  background-color: #ccc;
+}
+
+
+li>div>div>div {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
