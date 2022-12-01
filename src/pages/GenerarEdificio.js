@@ -12,6 +12,24 @@ class GenerarEdificio extends Component{
     
 
     render(){
+
+        const generarEdificio=e=>{
+            let nombre=document.getElementById("ingresonombre").value;
+            let direccion=document.getElementById("ingresodireccion").value;
+            let usuario=localStorage.getItem("user");
+
+            async function crearEdificio(){
+                let url="http://localhost:8080/api/edificios?usuario="+usuario+"&direccion="+direccion+"&nombre="+nombre;
+                const response=await fetch(url,{method:'POST'});
+                if(response.ok){
+                    alert("Se creó el edificio");
+                }
+                else{
+                    alert("No se pudo crear el edificio");
+                }
+            }
+            crearEdificio();
+        }
     
         if(localStorage.getItem("admin")=="true"){
         return(
@@ -28,14 +46,14 @@ class GenerarEdificio extends Component{
                     
                     <div className='item'>
                         <span>Nombre</span>
-                        <input type="text" placeholder='Ingrese el nombre'/>
+                        <input type="text" id='ingresonombre' placeholder='Ingrese el nombre'/>
                     </div>
                     <div className='item'>
                         <span>Dirección</span>
-                        <input type="text" placeholder='Ingrese la dirección'/>
+                        <input type="text" id='ingresodireccion' placeholder='Ingrese la dirección'/>
                     </div>
                     
-                    <button className='boton'>Generar</button>
+                    <button className='boton' onClick={generarEdificio}>Generar</button>
 
 
                 </div>
