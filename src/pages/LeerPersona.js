@@ -39,14 +39,27 @@ class LeerPersona extends Component{
             
 
             async function leerpersona() {
-                await fetch(baseURL+dni+'?usuario='+usuario).then((datos)=> {return datos.json();})
-                .then( (datos) =>{
-                    document.getElementById("nombre").innerText="Nombre: "+datos.nombre
+                const response=await fetch(baseURL+dni+'?usuario='+usuario);
+                if(response.ok){
+                    const data=await response.json().then(datos=> document.getElementById("nombre").value=datos.nombre)
                 }
-                );
+                else{
+                    document.getElementById("nombre").value="No existe nadie con ese documento";
+                }
             }
 
             leerpersona();
+         }
+
+         const modificarNombre=event =>{
+            let nombreAGuardar=document.getElementById("nombre").value;
+            console.log("llego");
+            let usuario=localStorage.getItem("user");
+            async function mandarUpdate(){
+                let url="http://localhost:8080/api/personas?usuario="+usuario+"&documento="+document.getElementById("dni").value+"&nombreNuevo="+document.getElementById("nombre").value;
+                await fetch(url,{method:'PUT'}).then(response =>{if(response.ok){alert("El cambio fue exitoso")}});
+            }
+            mandarUpdate();
          }
 
          
@@ -64,11 +77,15 @@ class LeerPersona extends Component{
                     <form onSubmit={this.handleSubmit}>
                     <input type="text" name="dni" id="dni" onChange={this.handleChange}></input>
                     </form>
-                    <p id="nombre">
-                        Nombre:
+                    <p>
+                        Nombre:<input type='text' id='nombre'></input>
                     </p> 
+
+                    <button className='boton' onClick={modificarNombre}>
+                        Modificar nombre
+                    </button>
                     
-                    <button className='buscar' id='buscar' onClick={nombre => handleSubmit()} >
+                    <button className='boton buscar' id='buscar' onClick={nombre => handleSubmit()} >
                         Buscar
                     </button>
                 </div>

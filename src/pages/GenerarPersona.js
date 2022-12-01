@@ -12,6 +12,24 @@ class GenerarPersona extends Component{
     
 
     render(){
+
+        const generarPersona=e=>{
+            let nombre=document.getElementById("ingresonombre").value;
+            let documento=document.getElementById("ingresodocumento").value;
+            let usuario=localStorage.getItem("user");
+
+            async function crearPersona(){
+                let url="http://localhost:8080/api/personas?usuario="+usuario+"&documento="+documento+"&nombre="+nombre;
+                const response=await fetch(url,{method:'POST'});
+                if(response.ok){
+                    alert("Se agregó a la persona");
+                }
+                else{
+                    alert("El documento ya está en uso");
+                }
+            }
+            crearPersona();
+        }
     
         if(localStorage.getItem("admin")=="true"){
         return(
@@ -30,16 +48,16 @@ class GenerarPersona extends Component{
                     
                     <div className='item'>
                         <span>Nombre</span>
-                        <input type="text" placeholder='Ingrese el nombre'/>
+                        <input type="text" id='ingresonombre' placeholder='Ingrese el nombre'/>
                     </div>
                     <div className='item'>
                         <span>Documento</span>
-                        <input type="text" placeholder='Ingrese el documento'/>
+                        <input type="text" id='ingresodocumento' placeholder='Ingrese el documento'/>
                     </div>
                     
                     
    
-                    <button className='boton'>Generar</button>
+                    <button className='boton' onClick={generarPersona}>Generar</button>
                 </div>
 
                 

@@ -8,23 +8,6 @@ import { Carousel } from 'react-responsive-carousel';
 
 class ConsultarReclamos extends Component{
 
-    seteo=()=>{
-      var coll = document.getElementsByClassName("collapsible");
-      var i;
-      console.log("setei");
-
-      for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var content = this.nextElementSibling;
-          if (content.style.display === "block") {
-              content.style.display = "none";
-          } else {
-              content.style.display = "block";
-            }
-          });
-      } 
-    }
     fetchReclamosHandler=async event => {
         localStorage.setItem("reclamoloading","true");
         try {
@@ -86,10 +69,6 @@ class ConsultarReclamos extends Component{
         }
         localStorage.setItem("reclamoloading","false");
       };
-    llamarCosas=e=>{
-      this.fetchReclamosHandler();
-      this.seteo();
-    }
 
     render(){
         const recetas=[];
@@ -112,7 +91,7 @@ class ConsultarReclamos extends Component{
                             <ul id="listaReclamos">
                             </ul>
                         </div>
-                        <button onClick={this.llamarCosas}>Buscar</button>
+                        <button onClick={this.fetchReclamosHandler}>Buscar</button>
                     </div>
                 </main>
                 );
