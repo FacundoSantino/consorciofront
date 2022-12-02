@@ -44,6 +44,17 @@ img {
   flex-flow: column;
 }
 
+.cajatamanio{
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  height: 50em;
+  width: auto;
+  border-radius: 20px;
+  box-shadow: 35px 25px 10px 5px rgba(0, 0, 0, 0.5);
+  display:inline-flex;
+  flex-flow: column;
+}
+
 .cajaMuestra{
   background: rgba(0, 0, 0, 0.4);
   width: auto;
