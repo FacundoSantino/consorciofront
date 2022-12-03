@@ -226,9 +226,10 @@ export default function BuscarEdificio(){
             }
             else{
                 alert("No se pudo modificar los datos.");
+                }
             }
-        }
         fetchModificarEdificio();
+        }
     }
     const agregarUnidad= e =>{
         async function fetchAgregarUnidad(){
@@ -247,7 +248,6 @@ export default function BuscarEdificio(){
             }
         }
         fetchAgregarUnidad();
-    }
     }
     const transferirDuenio=e=>{
         async function fetchTransferirDuenio(){
