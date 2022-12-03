@@ -29,7 +29,9 @@ img {
   width: auto;
   height: auto;
 }
-
+.borde{
+  border:3px dotted black;
+}
 .centrado{
   text-align: center;
 }
@@ -48,11 +50,21 @@ img {
   background: rgba(255, 255, 255, 0.8);
   padding: 20px;
   height: 50em;
-  width: auto;
+  width: 50em;
   border-radius: 20px;
   box-shadow: 35px 25px 10px 5px rgba(0, 0, 0, 0.5);
   display:inline-flex;
   flex-flow: column;
+}
+h3{
+  padding:3px;
+}
+.ingre{
+  display:inline-flex;
+}
+.ingresoDatos{
+  display:inline-flex;
+  flex-wrap:wrap;
 }
 
 .cajaMuestra{
@@ -73,6 +85,16 @@ img {
   border: none;
   cursor: pointer;
   max-width:100%;
+  padding:3px;
+}
+.botonGrande{
+  background-color: #5676f7;
+  display:block;
+  color:white;
+  border:none;
+  cursor:pointer;
+  margin:10px;
+  height:3em;
 }
 
 label{
@@ -127,6 +149,14 @@ label{
 
 input[type="text"],input[type="password"]{
   width: 80%;
+  padding: 12px 20px; 
+  background-color: #ccc;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.inputChico{
+  width: 32% !important;
   padding: 12px 20px; 
   background-color: #ccc;
   justify-content: center;
