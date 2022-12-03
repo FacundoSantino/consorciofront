@@ -231,6 +231,43 @@ export default function BuscarEdificio(){
         fetchModificarEdificio();
         }
     }
+    const modificarUnidad=e=>{
+        if (window.confirm('¿Estás seguro que querés modificar los datos de la unidad?')){
+            async function fetchModificarUnidad(){
+                const url="http://localhost:8080/api/unidades/"+unidadSeleccionada.id+"?usuario="+localStorage.getItem("user")+
+                "&piso="+document.getElementById("ingresopiso").value+
+                "&numero="+document.getElementById("ingresonumero").value;
+                const response=await fetch(url,{method:'PUT'});
+                if(response.ok){
+                    alert("Los datos se modificaron exitosamente");
+                    setCargaronUnidades(false);
+                }
+                else{
+                    alert("No se pudieron modificar los datos");
+                }
+            }
+            fetchModificarUnidad();
+        }
+    }
+    const borrarUnidad= e =>{
+        if (window.confirm('¿Estás seguro que querés borrar la unidad?')){
+            async function fetchBorrarUnidad(){
+                const url="http://localhost:8080/api/unidades/"+unidadSeleccionada.id+"?usuario="+localStorage.getItem("user");
+                const response=await fetch(url,{method:'DELETE'});
+                if(response.ok){
+                    alert("La unidad se borró exitosamente");
+                    setCargaronUnidades(false);
+                    setSeSeleccionoUnidad(false);
+                    setRecienVuelvoUnidad(true);
+                    setHiceInsercionesPersonas(false);
+                }
+                else{
+                    alert("No se pudo borrar la unidad");
+                }
+            }
+            fetchBorrarUnidad();
+        }
+    }
     const agregarUnidad= e =>{
         async function fetchAgregarUnidad(){
             const url="http://localhost:8080/api/edificios/unidades?numero="+document.getElementById("numeroUnidadAgregar").value+
@@ -334,16 +371,16 @@ export default function BuscarEdificio(){
                         </div>
                         <div className='ingre'>
                         <h3>Piso:</h3>
-                        <input type='text' defaultValue={unidadSeleccionada.piso}/>
+                        <input type='text' id="ingresopiso" defaultValue={unidadSeleccionada.piso}/>
                         </div>
                         <div className='ingre'>
                         <h3>Número:</h3>
-                        <input type='text' defaultValue={unidadSeleccionada.numero}/>
+                        <input type='text' id="ingresonumero" defaultValue={unidadSeleccionada.numero}/>
                         </div>
                     </div>
                     <div className='items'>
-                        <button className='boton item'>Modificar</button>
-                        <button className='boton item'>Borrar</button>
+                        <button className='boton item' onClick={modificarUnidad}>Modificar</button>
+                        <button className='boton item' onClick={borrarUnidad}>Borrar</button>
                     </div>
                     <h2>Dueños:</h2>
                     <div className='cajaMuestra'>
