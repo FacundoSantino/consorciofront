@@ -1,8 +1,9 @@
 import React,{Component,useState, useEffect, useCallback} from 'react'
 import flecha from '../imagenes/flecha.png'
 import logo from '../imagenes/logo.png'
-import accionesi from '../imagenes/log.png'
 import { Link } from 'react-router-dom'
+import accionesi from '../imagenes/log.png'
+
 
 export default function BuscarAcciones(){
     const[cargaron, setCargaron]=useState(false);

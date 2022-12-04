@@ -16,6 +16,7 @@ import LeerPersona from './pages/LeerPersona.js'
 import BuscarEdificio from './pages/BuscarEdificio.js'
 import ConsultarReclamos from './pages/ConsultarReclamos.js';
 import BuscarAcciones from './pages/BuscarAcciones.js';
+import BuscarReclamo from './pages/BuscarReclamo.js';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <Route path="/buscaredificio" element={<BuscarEdificio/>}/>
       <Route path="/consultarreclamos" element={<ConsultarReclamos/>}/>
       <Route path="/buscaracciones" element={<BuscarAcciones/>}/>
+      <Route path="/buscarreclamo" element={<BuscarReclamo/>}/>
     </Routes>
  
 
