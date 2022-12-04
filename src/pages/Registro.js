@@ -7,7 +7,11 @@ import {Link} from 'react-router-dom';
 class Registro extends Component {
 
     handleSubmit = event =>{
-        console.log("Se mandó el formulario");
+        async function fetchRegistro(){
+          const url="http://localhost:8080/api/personas/registro?usuario=Juan1&contrasenia=Perez1234&documento=DNI12345678";
+          const response=await fetch(url,{method:'PUT'});
+        }
+        fetchRegistro();
       }
 
 

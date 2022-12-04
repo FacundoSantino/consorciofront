@@ -22,6 +22,7 @@ export default function BuscarEdificio(){
     const [dueniosSeleccionada, setDueniosSeleccionada]=useState([]);
     const [inquilinosSeleccionada, setInquilinosSeleccionada]=useState([]);
     const [hiceInsercionesPersonas,setHiceInsercionesPersonas]=useState(false);
+    const [refreshPersonas,setRefreshPersonas]=useState(false);
 
     
     async function cargarEdificios(){
@@ -36,7 +37,7 @@ export default function BuscarEdificio(){
     async function inserciones(){
         if(cargaronEdificios){
             if(!hiceInserciones || recienVuelvo){
-                await new Promise(r => setTimeout(r, 1000));
+                await new Promise(r => setTimeout(r, 1200));
                 document.getElementById("listaedificios").innerHTML="";
                 for(const key in edificios){
                     document.getElementById("listaedificios").innerHTML+="<li><div>"+
@@ -88,7 +89,7 @@ export default function BuscarEdificio(){
 
     async function insercionesPersonas(){
         if(!hiceInsercionesPersonas && cargaronUnidades && seSeleccionoUnidad){
-            await new Promise(r => setTimeout(r, 1000));
+            await new Promise(r => setTimeout(r, 5000));
             document.getElementById("listaduenios").innerHTML="";
             document.getElementById("listainquilinos").innerHTML="";
             let insd=0;
@@ -156,7 +157,7 @@ export default function BuscarEdificio(){
 
     const seleccionUnidad=e =>{
         console.log("apretoboton");
-        if((!seSeleccionoUnidad) && seSelecciono && hiceInsercionesUnidad && 0<=parseInt(document.getElementById("campoidunidad").value)-1 && unidades.length>=parseInt(document.getElementById("campoidunidad").value)){
+        if(refreshPersonas){
             setUnidadSeleccionada(unidades[parseInt(document.getElementById("campoidunidad").value)-1]);
             async function traerPersonas(){
                 const urlduenios="http://localhost:8080/api/unidades/duenios?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user");
@@ -166,6 +167,20 @@ export default function BuscarEdificio(){
             }
             traerPersonas();
             setSeSeleccionoUnidad(true);
+            setRefreshPersonas(false);
+            setHiceInsercionesPersonas(false);
+        }
+        else if((!seSeleccionoUnidad) && seSelecciono && hiceInsercionesUnidad && 0<=parseInt(document.getElementById("campoidunidad").value)-1 && unidades.length>=parseInt(document.getElementById("campoidunidad").value)){
+            setUnidadSeleccionada(unidades[parseInt(document.getElementById("campoidunidad").value)-1]);
+            async function traerPersonas(){
+                const urlduenios="http://localhost:8080/api/unidades/duenios?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user");
+                const urlinquilinos="http://localhost:8080/api/unidades/inquilinos?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user");
+                const responseduenios=fetch(urlduenios).then(data=>data.json()).then(data=>setDueniosSeleccionada(data));
+                const responseinquilinos=fetch(urlinquilinos).then(data=>data.json()).then(data=>setInquilinosSeleccionada(data));
+            }
+            traerPersonas();
+            setSeSeleccionoUnidad(true);
+            setHiceInsercionesPersonas(false);
         }
     }
     const volver =e =>{
@@ -277,8 +292,7 @@ export default function BuscarEdificio(){
             const response=await fetch(url,{method:'POST'});
             if(response.ok){
                 alert("Unidad agregada exitosamente");
-                setCargaronUnidades(false);
-                setHiceInsercionesUnidad(false);
+                setRefreshPersonas(true);
             }
             else{
                 alert("No se pudo agregar la unidad");
@@ -288,65 +302,70 @@ export default function BuscarEdificio(){
     }
     const transferirDuenio=e=>{
         async function fetchTransferirDuenio(){
-            const url="";
-            const response=fetch(url);
+            const url="http://localhost:8080/api/unidades/transferir?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user")+"&documento="+document.getElementById("documentodue").value;
+            const response=await fetch(url,{method:'PUT'});
             if(response.ok){
-                alert("ok");
+                alert("Se transfirió la unidad exitosamente");
+                setRefreshPersonas(true);
             }
             else{
-                alert("nook");
+                alert("No pudo trasferirse la unidad");
             }
         }
         fetchTransferirDuenio();
     }
     const agregarDuenio=e=>{
         async function fetchAgregarDuenio(){
-            const url="";
-            const response=fetch(url);
+            const url="http://localhost:8080/api/unidades/agregarDuenio?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user")+"&documento="+document.getElementById("documentodue").value;
+            const response=await fetch(url,{method:'PUT'});
             if(response.ok){
-                alert("ok");
+                alert("Se agregó el dueño exitosamente");
+                setRefreshPersonas(true);
             }
             else{
-                alert("nook");
+                alert("No pudo agregarse al dueño");
             }
         }
         fetchAgregarDuenio();
     }
-    const transferirInquilino=e=>{
-        async function fetchTransferirInquilino(){
-            const url="";
-            const response=fetch(url);
+    const alquilarUnidad=e=>{
+        async function fetchAlquilarUnidad(){
+            const url="http://localhost:8080/api/unidades/alquilar?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user")+"&documento="+document.getElementById("documentoinq").value;
+            const response=await fetch(url,{method:'PUT'});
             if(response.ok){
-                alert("ok");
+                alert("Se alquiló la unidad exitosamente");
+                setRefreshPersonas(true);
             }
             else{
-                alert("nook");
+                alert("No pudo alquilarse la unidad. ¿Te aseguraste de que esté libre primero?");
             }
         }
-        fetchTransferirInquilino();
+        fetchAlquilarUnidad();
     }
     const agregarInquilino=e=>{
         async function fetchAgregarInquilino(){
-            const url="";
-            const response=fetch(url);
+            const url="http://localhost:8080/api/unidades/agregarInquilino?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user")+"&documento="+document.getElementById("documentoinq").value;
+            const response=await fetch(url,{method:'PUT'});
             if(response.ok){
-                alert("ok");
+                alert("Se agregó al inquilino exitosamente");
+                setRefreshPersonas(true);
             }
             else{
-                alert("nook");
+                alert("No pudo agregarse al inquilino");
             }
         }
         fetchAgregarInquilino();
     }
     const liberar=e=>{
         async function fetchLiberar(){
-            const url="";
-            const response=fetch(url);
+            const url="http://localhost:8080/api/unidades/liberar?codigoEdificio="+seleccionado.codigo+"&piso="+unidadSeleccionada.piso+"&numero="+unidadSeleccionada.numero+"&usuario="+localStorage.getItem("user");
+            const response=await fetch(url,{method:'PUT'});
             if(response.ok){
-                alert("ok");
+                alert("Se liberó la unidad exitosamente");
+                setRefreshPersonas(true);
             }
             else{
-                alert("nook");
+                alert("No pudo liberarse a la unidad");
             }
         }
         fetchLiberar();
@@ -388,10 +407,10 @@ export default function BuscarEdificio(){
                             Cargando...
                         </ul>
                     </div>
-                    <input type='text' placeholder='Ingrese el documento deseado'/>
+                    <input type='text' id='documentodue' placeholder='Ingrese el documento deseado'/>
                     <div className='items'>
-                        <button className='boton item'>Transferir</button>
-                        <button className='boton item'>Agregar Dueño</button>
+                        <button onClick={transferirDuenio} className='boton item'>Transferir</button>
+                        <button onClick={agregarDuenio} className='boton item'>Agregar Dueño</button>
                     </div>
                     <h2>Inquilinos:</h2>
                     <div className='cajaMuestra'>
@@ -399,11 +418,11 @@ export default function BuscarEdificio(){
                             Cargando...
                         </ul>
                     </div>
-                    <input type='text' placeholder='Ingrese el documento deseado'/>
+                    <input type='text' id='documentoinq' placeholder='Ingrese el documento deseado'/>
                     <div className='items'>
-                        <button className='boton item'>Transferir</button>
-                        <button className='boton item'>Agregar Inquilino</button>
-                        <button className='boton item'>Liberar</button>
+                        <button onClick={alquilarUnidad} className='boton item'>Alquilar</button>
+                        <button onClick={agregarInquilino} className='boton item'>Agregar Inquilino</button>
+                        <button onClick={liberar} className='boton item'>Liberar</button>
                     </div>
                 </div>
             </main>

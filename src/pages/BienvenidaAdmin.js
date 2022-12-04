@@ -2,7 +2,6 @@ import React,{Component} from 'react'
 import logo from '../imagenes/logo.png'
 import persona from '../imagenes/persona.webp'
 import edificios from '../imagenes/edificios.png'
-import capas from '../imagenes/capas.png'
 import reclamos from '../imagenes/reclamos.png'
 import personas from '../imagenes/personas.png'
 import acciones from '../imagenes/log.png'
@@ -39,11 +38,6 @@ class BienvenidaAdmin extends Component{
                              <div className='item1'>
                                  <img src={edificios}/>
                                  <Link to='/edificios' ><button className='boton'>Edificios</button></Link>
-                             </div>
-   
-                             <div className='item2'>
-                                 <img src={capas}/>
-                                 <Link to='/unidades' ><button className='boton'>Unidades</button></Link>
                              </div>
    
                              <div className='item3'>
