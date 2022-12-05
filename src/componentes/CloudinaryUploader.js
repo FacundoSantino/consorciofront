@@ -75,7 +75,7 @@ function CloudinaryUploader() {
             <div className="images-preview-caja" id="cajaPreview">
                 {images.map((image) => (
                     <div className="image-preview" id="imagenPreview">
-                        <img src = {image.url}/>
+                        <img className='imagenCloudinary' src = {image.url}/>
                         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
                         {imagesToRemove != image.public_id && <i class="fa fa-times close-icon" onClick={() => handleRemoveImg(image)}>
                         </i>}
